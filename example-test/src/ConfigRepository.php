@@ -9,9 +9,12 @@ class ConfigRepository
     /**
      * ConfigRepository Constructor
      */
-    public function __construct(array $config)
+    public function __construct(array $config = null)
     {
-       $this->config = $config;
+        if(!isset($config) && !is_array($config))
+            $this->config = array();
+        else
+            $this->config = $config;
     }
 
     /**
@@ -38,6 +41,7 @@ class ConfigRepository
     public function set($key, $value)
     {
         $this->config[$key] = $value;
+        return $this;
     }
 
     /**
