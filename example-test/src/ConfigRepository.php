@@ -2,7 +2,7 @@
 
 namespace Coalition;
 
-class ConfigRepository extends \ArrayObject
+class ConfigRepository implements \ArrayAccess
 {
     protected $config;
 
@@ -19,6 +19,48 @@ class ConfigRepository extends \ArrayObject
         return $this;
     }
 
+    /*
+     * ARRAY ACCESS METHODS
+     */
+        /**
+         * Get offset config value
+         */
+        public function offsetGet($key)
+        {
+            if(isset($this->config[$key]))
+                return $this->config[$key];
+
+            return null;
+        }
+
+        /**
+         * Check if offset config isset
+         */
+        public function offsetExists($key)
+        {
+            return isset($this->config[$key]);
+        }
+
+
+        /**
+         * Set offset config value
+         */
+        public function offsetSet($key, $value)
+        {
+            $this->config[$key] = $value;
+        }
+
+        /**
+         * Unset offset config value
+         */
+        public function offsetUnset($key)
+        {
+            unset($this->config[$key]);
+        }
+    /*
+     * END OF ARRAY ACCESS METHODS
+     */
+
     /**
      * Determine whether the config array contains the given key
      *
@@ -29,8 +71,8 @@ class ConfigRepository extends \ArrayObject
     {
         if(array_key_exists($key, $this->config))
             return true;
-        else
-            return false;
+        
+        return false;
     }
 
     /**
@@ -60,8 +102,8 @@ class ConfigRepository extends \ArrayObject
     {
         if(isset($this->config[$key]))
             return $this->config[$key];
-        else
-            return $default;
+        
+        return $default;
     }
 
     /**
