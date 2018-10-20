@@ -70,7 +70,8 @@ class ConfigRepository
      */
     public function remove($key)
     {
-
+        unset($this->config[$key]);
+        return $this;
     }
 
     /**
