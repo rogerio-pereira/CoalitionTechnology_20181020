@@ -4,12 +4,14 @@ namespace Coalition;
 
 class ConfigRepository
 {
+    protected $config;
+
     /**
      * ConfigRepository Constructor
      */
-    public function __construct()
+    public function __construct(array $config)
     {
-       
+       $this->config = $config;
     }
 
     /**
@@ -20,7 +22,10 @@ class ConfigRepository
      */
     public function has($key)
     {
-        
+        if(array_key_exists($key, $this->config))
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -32,7 +37,7 @@ class ConfigRepository
      */
     public function set($key, $value)
     {
-        
+        $this->config[$key] = $value;
     }
 
     /**
