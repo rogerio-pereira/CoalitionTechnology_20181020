@@ -56,7 +56,10 @@ class ConfigRepository
      */
     public function get($key, $default = null)
     {
-
+        if(isset($this->config[$key]))
+            return $this->config[$key];
+        else
+            return $default;
     }
 
     /**
