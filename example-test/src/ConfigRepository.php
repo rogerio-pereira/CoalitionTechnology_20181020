@@ -85,11 +85,23 @@ class ConfigRepository
      */
     public function load($files)
     {
-        $info = pathinfo($files);
-        $fileName = $info['filename'];
+        //files is array
+        if(is_array($files)) {
+            foreach ($files as $file) {
+                $info = pathinfo($file);
+                $fileName = $info['filename'];
 
-        $this->config[$fileName] = include $files;
-        
+                $this->config[$fileName] = include $file;
+            }
+        }
+        //file is not array
+        else {
+            $info = pathinfo($files);
+            $fileName = $info['filename'];
+
+            $this->config[$fileName] = include $files;
+        }
+
         return $this;
     }
 }
