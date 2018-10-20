@@ -2,7 +2,7 @@
 
 namespace Coalition;
 
-class ConfigRepository
+class ConfigRepository extends \ArrayObject
 {
     protected $config;
 
@@ -15,6 +15,8 @@ class ConfigRepository
             $this->config = array();
         else
             $this->config = $config;
+
+        return $this;
     }
 
     /**
