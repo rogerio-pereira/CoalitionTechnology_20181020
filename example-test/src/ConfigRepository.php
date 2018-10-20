@@ -85,6 +85,11 @@ class ConfigRepository
      */
     public function load($files)
     {
+        $info = pathinfo($files);
+        $fileName = $info['filename'];
 
+        $this->config[$fileName] = include $files;
+        
+        return $this;
     }
 }
